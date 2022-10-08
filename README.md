@@ -1,12 +1,17 @@
 # Magic
+
+This project utilizes [MediaPipe](https://github.com/google/mediapipe/) and CameraX to implement realtime pose tracking feature. 
 ## Features 🎨
 
 - **100% Kotlin-only project**.
-- Coroutine, Jetpack compose, Hilt, Flow, AndroidX,MVVM.
+- MediaPipe and CameraX Pose Tracking
+- Coroutine, Jetpack compose, Hilt, AndroidX,MVVM.
 - 100% Gradle Kotlin DSL setup.
 - Dependency versions managed via `buildSrc`.
 - CI Setup with GitHub Actions.
 - Kotlin Static Analysis via `ktlint`.
+
+Mediapipe related files can be found under [MediaPipe Directory](app/src/main/java/com/android/magic/mediapipe)
 
 ## Gradle Setup 🐘
 

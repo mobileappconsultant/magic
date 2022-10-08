@@ -3,6 +3,9 @@
     package="com.android.magic">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- For using the camera -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
     <queries>
         <package android:name="com.android.chrome" />
     </queries>
