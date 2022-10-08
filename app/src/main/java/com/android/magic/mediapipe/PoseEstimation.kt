@@ -29,7 +29,7 @@ class PoseEstimation @Inject constructor() : MediaPipe {
     private val inputVideoStream: String = "input_video"
     private val outputVideoStream: String = "throttled_input_video"
     private val outputLandmarksStream: String = "pose_landmarks"
-    private val cameraFacing: CameraHelper.CameraFacing = CameraHelper.CameraFacing.BACK
+    private val cameraFacing: CameraHelper.CameraFacing = CameraHelper.CameraFacing.FRONT
     private val shouldFlipFramesVertically: Boolean = true
     private val mediaPipeJni: String = "mediapipe_jni"
     private val eglManager: EglManager = EglManager(null)

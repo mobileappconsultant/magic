@@ -33,5 +33,9 @@ enum class PoseMarker {
     LEFT_HEEL,
     RIGHT_HEEL,
     LEFT_FOOT_INDEX,
-    RIGHT_FOOT_INDEX,
+    RIGHT_FOOT_INDEX;
+
+    companion object {
+        fun fromOrdinal(ordinal: Int) = PoseMarker.values().first { it.ordinal == ordinal }
+    }
 }
