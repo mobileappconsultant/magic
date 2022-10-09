@@ -88,6 +88,8 @@ class PoseEstimation @Inject constructor() : MediaPipe {
         }
         viewGroup.addView(previewDisplayView)
 
+        previewDisplayView.visibility = View.INVISIBLE
+
         previewDisplayView.holder.addCallback(
             object : SurfaceHolder.Callback {
                 override fun surfaceCreated(holder: SurfaceHolder) {

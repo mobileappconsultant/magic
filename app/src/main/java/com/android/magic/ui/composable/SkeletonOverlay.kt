@@ -26,33 +26,29 @@ enum class BodyPart {
     RIGHT_SIDE,
     RIGHT_FEMUR,
     RIGHT_TIBIA,
-    LEFT_EYE,
-    RIGHT_EYE,
-    NOSE,
+    EYE,
     MOUTH
 }
 /** Draw the detected pose in preview.  */
 @Composable
 fun SkeletonOverlay(
     landmarks: List<LandmarkProto.NormalizedLandmark>,
-    options: SkeletonOptions = SkeletonOptions(),
 ) {
     Canvas(
         modifier = Modifier.fillMaxSize()
     ) {
-        val jointColorMap = mutableMapOf<Int, Color>()
 
         fun drawJoint(color: Color, center: Offset, radius: Float) {
             this.drawCircle(
                 color = color,
                 radius = radius,
-                style = Stroke(width = options.STROKE_WIDTH),
+                style = Stroke(width = SkeletonOptions.STROKE_WIDTH),
                 center = center,
             )
         }
 
         // Go through each limb
-        options.limbs.forEach { (_, joints) ->
+        SkeletonOptions.limbs.forEach { (_, joints) ->
 
             // Store the start and end point of each limb
             val start = landmarks[joints[0]]
@@ -89,15 +85,13 @@ fun SkeletonOverlay(
                 )
             }
 
-            if (joints[0] != joints[1]) {
-                drawLine(
-                    color = colorWhite,
-                    strokeWidth = options.STROKE_WIDTH,
-                    start = Offset(startPoint.x, startPoint.y),
-                    end = Offset(endPoint.x, endPoint.y),
-                    cap = StrokeCap.Round
-                )
-            }
+            drawLine(
+                color = colorWhite,
+                strokeWidth = SkeletonOptions.STROKE_WIDTH,
+                start = Offset(startPoint.x, startPoint.y),
+                end = Offset(endPoint.x, endPoint.y),
+                cap = StrokeCap.Round
+            )
         }
     }
 }
@@ -110,8 +104,8 @@ fun pointOnLine(start: Point, end: Point, length: Double, distance: Double): Poi
 }
 
 // Options are created and stored prior only once
-class SkeletonOptions {
-    val STROKE_WIDTH = 5.0f
+object SkeletonOptions {
+    const val STROKE_WIDTH = 5.0f
 
     val limbs: Map<BodyPart, List<Int>> = mapOf(
         // / CENTER
@@ -131,9 +125,7 @@ class SkeletonOptions {
         Pair(BodyPart.RIGHT_SIDE, listOf(PoseMarker.RIGHT_SHOULDER.ordinal, PoseMarker.RIGHT_HIP.ordinal)),
         Pair(BodyPart.RIGHT_FEMUR, listOf(PoseMarker.RIGHT_HIP.ordinal, PoseMarker.RIGHT_KNEE.ordinal)),
         Pair(BodyPart.RIGHT_TIBIA, listOf(PoseMarker.RIGHT_KNEE.ordinal, PoseMarker.RIGHT_ANKLE.ordinal)),
-        Pair(BodyPart.LEFT_EYE, listOf(PoseMarker.LEFT_EYE.ordinal, PoseMarker.RIGHT_EYE.ordinal)),
-        Pair(BodyPart.NOSE, listOf(PoseMarker.NOSE.ordinal, PoseMarker.NOSE.ordinal)),
+        Pair(BodyPart.EYE, listOf(PoseMarker.LEFT_EYE.ordinal, PoseMarker.RIGHT_EYE.ordinal)),
         Pair(BodyPart.MOUTH, listOf(PoseMarker.LEFT_MOUTH.ordinal, PoseMarker.RIGHT_MOUTH.ordinal)),
-
     )
 }

@@ -99,10 +99,6 @@ dependencies {
     kapt(Hilt.hiltCompiler)
     implementation(Hilt.hiltNavigation)
 
-    implementation(Compose.coil)
-    implementation(Compose.paging)
-    implementation(Compose.swipeRefresh)
-
     implementation(Camera.camera)
     implementation(Camera.cameraLifecycle)
     implementation(Camera.cameraView)

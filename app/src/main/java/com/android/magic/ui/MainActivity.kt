@@ -31,6 +31,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.android.magic.ui.composable.PermissionWrapper
 import com.android.magic.ui.composable.SkeletonOverlay
 import com.android.magic.ui.theme.MagicTheme
 import com.android.magic.utils.extractData
@@ -40,8 +41,11 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
-            MagicApp()
+            PermissionWrapper {
+                MagicApp()
+            }
         }
     }
 }
