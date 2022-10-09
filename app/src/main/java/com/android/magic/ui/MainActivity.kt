@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
@@ -25,6 +26,8 @@ import androidx.compose.material.Text
 import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -74,12 +77,14 @@ fun MagicApp() {
                 }
             }
 
+            val landmarks by viewModel.landmarks.collectAsState()
+
             LaunchedEffect("") {
                 viewModel.setup(context, previewView)
             }
 
             BottomSheetScaffold(
-                sheetContent = { BottomSheet(landmarks = viewModel.landmarks.value.extractData()) },
+                sheetContent = { BottomSheet(landmarks = landmarks.extractData()) },
                 modifier = Modifier.fillMaxSize(),
                 scaffoldState = sheetState,
                 sheetPeekHeight = 100.dp,
@@ -92,7 +97,7 @@ fun MagicApp() {
                             previewView
                         }
                     )
-                    viewModel.landmarks.value?.let {
+                    landmarks?.let {
                         SkeletonOverlay(landmarks = it)
                     }
                 }
@@ -107,6 +112,7 @@ fun BottomSheet(landmarks: String) {
         modifier = Modifier
             .padding(32.dp)
             .heightIn(max = 250.dp)
+            .fillMaxWidth()
             .verticalScroll(rememberScrollState()),
     ) {
         Text(

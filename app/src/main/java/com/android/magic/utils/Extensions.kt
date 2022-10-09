@@ -21,4 +21,4 @@ fun List<NormalizedLandmark>?.extractData(): String {
     return stringBuilder.toString()
 }
 
-fun Float.toPercent() = "${times(100)}%"
+fun Float.toPercent() = "${String.format("%.2f", times(100))}%"
